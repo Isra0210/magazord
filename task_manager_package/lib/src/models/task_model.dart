@@ -30,13 +30,6 @@ class TaskModel {
     );
   }
 
-  Map<String, dynamic> toMap() => {
-        kId: id,
-        kTitle: title,
-        kDescription: description,
-        kCompleted: completed
-      };
-
   factory TaskModel.fromMap(Map<String, dynamic> map) {
     return TaskModel(
       id: map[kId],
@@ -44,11 +37,6 @@ class TaskModel {
       description: map[kDescription],
       completed: map[kCompleted],
     );
-  }
-
-  @override
-  String toString() {
-    return 'TaskModel(id: $id, title: $title, description: $description, completed: $completed)';
   }
 
   @override
