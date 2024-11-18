@@ -16,78 +16,81 @@ class BottomNavigationBarWidget extends GetView<HomeController> {
       PageData(label: 'Clima', icon: FontAwesomeIcons.cloudBolt),
       PageData(label: 'Loja', icon: FontAwesomeIcons.store),
     ];
-    return AnimatedTheme(
-      data: theme,
-      duration: const Duration(milliseconds: 100),
-      curve: Curves.easeInOut,
-      child: AnimatedContainer(
-        width: MediaQuery.of(context).size.width,
-        padding: const EdgeInsets.only(bottom: 20, top: 4, left: 16, right: 16),
-        decoration: BoxDecoration(
-          color: theme.scaffoldBackgroundColor,
-          boxShadow: [topBoxShadow(controller.themeMode)],
-        ),
+    return Obx(() {
+      return AnimatedTheme(
+        data: theme,
         duration: const Duration(milliseconds: 100),
         curve: Curves.easeInOut,
-        child: Row(
-          children: [
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ...pages.map(
-                    (item) {
-                      final index = pages.indexOf(item);
-                      return Material(
-                        child: InkWell(
-                          overlayColor: WidgetStateProperty.all(
-                            theme.colorScheme.surface,
-                          ),
-                          borderRadius: BorderRadius.circular(50),
-                          onTap: () {
-                            controller.currentPageIndex = index;
-                          },
-                          child: Obx(() {
-                            final isCurrentItem =
-                                index == controller.currentPageIndex;
-                            return Container(
-                              padding: const EdgeInsets.all(8),
-                              child: Column(
-                                children: [
-                                  Icon(
-                                    item.icon,
-                                    size: 18,
-                                    color: isCurrentItem
-                                        ? theme.primaryColor
-                                        : null,
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    item.label,
-                                    style:
-                                        theme.textTheme.labelMedium!.copyWith(
+        child: AnimatedContainer(
+          width: MediaQuery.of(context).size.width,
+          padding:
+              const EdgeInsets.only(bottom: 20, top: 4, left: 16, right: 16),
+          decoration: BoxDecoration(
+            color: theme.scaffoldBackgroundColor,
+            boxShadow: [topBoxShadow(controller.themeMode)],
+          ),
+          duration: const Duration(milliseconds: 100),
+          curve: Curves.easeInOut,
+          child: Row(
+            children: [
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ...pages.map(
+                      (item) {
+                        final index = pages.indexOf(item);
+                        return Material(
+                          child: InkWell(
+                            overlayColor: WidgetStateProperty.all(
+                              theme.colorScheme.surface,
+                            ),
+                            borderRadius: BorderRadius.circular(50),
+                            onTap: () {
+                              controller.currentPageIndex = index;
+                            },
+                            child: Obx(() {
+                              final isCurrentItem =
+                                  index == controller.currentPageIndex;
+                              return Container(
+                                padding: const EdgeInsets.all(8),
+                                child: Column(
+                                  children: [
+                                    Icon(
+                                      item.icon,
+                                      size: 18,
                                       color: isCurrentItem
                                           ? theme.primaryColor
                                           : null,
                                     ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          }),
-                        ),
-                      );
-                    },
-                  ),
-                ],
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      item.label,
+                                      style:
+                                          theme.textTheme.labelMedium!.copyWith(
+                                        color: isCurrentItem
+                                            ? theme.primaryColor
+                                            : null,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(width: 30),
-            const SwitcherThemeModeWidget(),
-          ],
+              const SizedBox(width: 30),
+              const SwitcherThemeModeWidget(),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 }
 

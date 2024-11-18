@@ -1,3 +1,4 @@
+import 'package:ecommerce_package/ecommerce_package.dart';
 import 'package:example/src/controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,12 +11,11 @@ class HomePage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    // final theme = Theme.of(context);
     return Obx(() {
       final pages = [
         TaskManagerPackage(theme: controller.theme),
-        Scaffold(body: Center(child: Text('Clima tempo'))),
-        Scaffold(body: Center(child: Text('Store'))),
+        const Scaffold(body: Center(child: Text('Clima'))),
+        EcommercePackage(theme: controller.theme),
       ];
       return Stack(
         children: [

@@ -31,6 +31,7 @@ class AppTheme {
       backgroundColor: white,
       titleTextStyle: GoogleFonts.montserrat(fontSize: 20, color: black),
       iconTheme: const IconThemeData(color: black),
+      surfaceTintColor: Colors.transparent,
     ),
     checkboxTheme: CheckboxThemeData(
       side: const BorderSide(color: black),
@@ -61,6 +62,7 @@ class AppTheme {
       backgroundColor: backgroundDark,
       titleTextStyle: GoogleFonts.montserrat(fontSize: 20, color: white),
       iconTheme: const IconThemeData(color: white),
+      surfaceTintColor: Colors.transparent,
     ),
     checkboxTheme: CheckboxThemeData(
       fillColor: WidgetStateProperty.all(Colors.transparent),

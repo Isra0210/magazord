@@ -1,7 +1,16 @@
 library ecommerce_package;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
+import 'package:flutter/material.dart';
+
+import 'src/views/product_list_view.dart';
+
+class EcommercePackage extends StatelessWidget {
+  const EcommercePackage({required this.theme, super.key});
+
+  final ThemeData theme;
+
+  @override
+  Widget build(BuildContext context) {
+    return ProductListView(theme: theme);
+  }
 }
