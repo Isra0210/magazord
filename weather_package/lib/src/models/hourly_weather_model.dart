@@ -44,7 +44,7 @@ class HourlyWeatherModel {
       uvi: (json['uvi']).toDouble(),
       clouds: json['clouds'],
       visibility: json['visibility'],
-      windSpeed: json['wind_speed'],
+      windSpeed: (json['wind_speed']).toDouble(),
       windDeg: json['wind_deg'],
       windGust: json['wind_gust']?.toDouble(),
       weather: (json['weather'] as List)

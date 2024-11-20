@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:weather_package/src/controller/weather_controller.dart';
 import 'package:weather_package/src/views/widgets/current_weather_widget.dart';
 import 'package:weather_package/src/views/widgets/daily_weather_list_widget.dart';
+import 'package:weather_package/src/views/widgets/loading_widget.dart';
 import 'package:weather_package/src/views/widgets/no_permission_widget.dart';
 import 'package:weather_package/src/views/widgets/hourly_weather_list_widget.dart';
 
@@ -26,15 +27,20 @@ class WeatherView extends GetView<WeatherController> {
           child: FutureBuilder(
             future: controller.getWeatherData(),
             builder: (context, snapshot) {
+              final errorMessage = Stack(
+                alignment: Alignment.center,
+                children: [
+                  LoadingWidget(theme: theme),
+                  if (controller.error != null)
+                    TextErrorWidget(error: controller.error!, theme: theme),
+                ],
+              );
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              if (controller.error != null) {
-                return TextErrorWidget(error: controller.error!, theme: theme);
+                return errorMessage;
               }
               return Obx(() {
                 if (controller.weather == null) {
-                  return const Center(child: CircularProgressIndicator());
+                  return errorMessage;
                 }
                 final weather = controller.weather!;
                 return SingleChildScrollView(
