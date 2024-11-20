@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "SIMULATOR debug dev",
+            "request": "launch",
+            "program": "./example/lib/main.dart",
+            "type": "dart",
+            "args": [
+                "--dart-define=APPID=a0df73c6d1c42d8511f885d8e0200eb7"
+            ]
+        },
+    ]
+}
