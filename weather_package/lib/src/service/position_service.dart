@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -47,10 +49,14 @@ class PositionService {
         position.longitude,
       );
       if (placemarks.isNotEmpty && placemarks.first.locality != null) {
+        String? city;
+        if (Platform.isIOS) {
+          city = placemarks.first.locality;
+        } else {
+          city = placemarks.first.subLocality;
+        }
         Get.log('User city: ${placemarks.first.locality}');
-        return Right(
-          '${placemarks.first.locality} - ${placemarks.first.administrativeArea}',
-        );
+        return Right('$city - ${placemarks.first.administrativeArea}');
       } else {
         Get.log('User city not found', isError: true);
         return Left(CityNotFound());
