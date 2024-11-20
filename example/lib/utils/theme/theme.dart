@@ -50,7 +50,6 @@ class AppTheme {
       onSecondary: secondary.withOpacity(0.2),
       tertiary: tertiary,
       onTertiary: tertiary.withOpacity(0.2),
-      // surface: const Color(0xFF1E1E1E),
       surface: const Color(0xFF1E1E1E),
       onSurface: white,
       error: const Color(0xFFCF6679),

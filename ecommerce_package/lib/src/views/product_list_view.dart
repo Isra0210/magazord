@@ -55,7 +55,6 @@ class ProductListView extends StatelessWidget {
                       ],
                     ),
                     clipBehavior: Clip.hardEdge,
-                    // alignment: Alignment.center,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
