@@ -8,12 +8,15 @@ import 'package:get_storage/get_storage.dart';
 
 import 'utils/theme/theme.dart';
 
-void main() async {
-  //Initialized manually because 'GetMaterialApp' depends on this dependency injection.
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+Future<void> setupDi() async {
   await GetStorage.init();
   Get.put(HomeController(cache: Cache()));
+}
+
+void main() async {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  await setupDi();
   runApp(const MyApp());
 }
 
@@ -30,9 +33,7 @@ class MyApp extends GetView<HomeController> {
         themeMode: controller.themeMode,
         debugShowCheckedModeBanner: false,
         home: const HomeView(),
-        onInit: () {
-          FlutterNativeSplash.remove();
-        },
+        onInit: () => FlutterNativeSplash.remove(),
       );
     });
   }

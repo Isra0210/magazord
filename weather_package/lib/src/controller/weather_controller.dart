@@ -45,13 +45,13 @@ class WeatherController extends GetxController implements GetxService {
         _checkIfPermissionError(failure);
         error = failure.message;
       }, (weather) async {
-        await getUserCity();
+        await _getUserCity();
         _weather.value = weather;
       });
     });
   }
 
-  Future<void> getUserCity() async {
+  Future<void> _getUserCity() async {
     final cityOrError = await _positionService.getCityFromCoordinates();
     cityOrError.fold(
       (failure) {

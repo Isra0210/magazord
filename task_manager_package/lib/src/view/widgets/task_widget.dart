@@ -27,7 +27,7 @@ class TaskWidget extends GetView<TaskController> {
         ),
         subtitle: Text(
           task.description,
-          style: theme.textTheme.bodySmall!,
+          style: theme.textTheme.bodySmall,
         ),
         trailing: Checkbox(
           activeColor: theme.colorScheme.onSurface,

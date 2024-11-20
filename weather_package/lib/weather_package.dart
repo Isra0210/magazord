@@ -14,10 +14,13 @@ class WeatherPackage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(
-      WeatherController(WeatherService(GetConnect()), PositionService()),
-    );
-
+    setupDi();
     return WeatherView(theme: theme);
   }
+}
+
+void setupDi() {
+  Get.put(
+    WeatherController(WeatherService(GetConnect()), PositionService()),
+  );
 }

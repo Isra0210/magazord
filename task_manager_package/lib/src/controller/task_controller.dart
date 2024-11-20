@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:task_manager_package/src/local_db/cache.dart';
 
-import '../models/data.dart';
+import '../local_db/data.dart';
 import '../models/task_model.dart';
 
 class TaskController extends GetxController implements GetxService {

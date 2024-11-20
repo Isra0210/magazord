@@ -14,7 +14,11 @@ class TaskManagerPackage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(TaskController(cache: Cache()));
+    setupDi();
     return TaskListView(theme: theme);
   }
+}
+
+void setupDi() {
+  Get.put(TaskController(cache: Cache()));
 }
