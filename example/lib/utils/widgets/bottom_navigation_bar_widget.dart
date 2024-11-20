@@ -28,7 +28,7 @@ class BottomNavigationBarWidget extends GetView<HomeController> {
             actions: [
               TextButton(
                 onPressed: () {
-                  controller.updateThemeColor(const Color(0xFF178F4E));
+                  controller.updateThemeColor(primaryColor);
                   Get.back();
                 },
                 child: Text(

@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 
 class StarRating extends StatelessWidget {
-  const StarRating({
-    required this.theme,
-    required this.rating,
-    super.key,
-  });
+  const StarRating({required this.theme, required this.rating, super.key});
 
   final double rating;
   final ThemeData theme;

@@ -1,4 +1,4 @@
-import 'package:ecommerce_package/src/models/data.dart';
+import 'package:ecommerce_package/src/data/data.dart';
 import 'package:ecommerce_package/src/models/product_model.dart';
 import 'package:get/get.dart';
 

@@ -31,21 +31,19 @@ class TaskModel {
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      kId: id,
-      kTitle: title,
-      kDescription: description,
-      kCompleted: completed,
-    };
-  }
+  Map<String, dynamic> toMap() => {
+        kId: id,
+        kTitle: title,
+        kDescription: description,
+        kCompleted: completed,
+      };
 
   factory TaskModel.fromMap(Map<String, dynamic> map) {
     return TaskModel(
-      id: map[kId] as int,
-      title: map[kTitle] as String,
-      description: map[kDescription] as String,
-      completed: map[kCompleted] as bool,
+      id: map[kId],
+      title: map[kTitle],
+      description: map[kDescription],
+      completed: map[kCompleted],
     );
   }
 

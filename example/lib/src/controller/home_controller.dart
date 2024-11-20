@@ -17,8 +17,9 @@ class HomeController extends GetxController {
   ThemeMode get themeMode => _themeMode.value;
   set themeMode(ThemeMode value) => _themeMode.value = value;
 
-  late final Rx<ThemeData> _theme =
-      Rx(AppTheme.lightTheme.copyWith(primaryColor: getColorOnCache()));
+  late final Rx<ThemeData> _theme = Rx(AppTheme.lightTheme.copyWith(
+    primaryColor: getColorOnCache(),
+  ));
   ThemeData get theme => _theme.value;
   set theme(ThemeData value) => _theme.value = value;
 
