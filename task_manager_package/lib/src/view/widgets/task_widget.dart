@@ -16,7 +16,7 @@ class TaskWidget extends GetView<TaskController> {
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
       color: task.completed
-          ? theme.colorScheme.onPrimary
+          ? theme.primaryColor.withOpacity(0.2)
           : theme.colorScheme.surface,
       child: ListTile(
         title: Text(

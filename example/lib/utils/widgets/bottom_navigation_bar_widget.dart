@@ -5,20 +5,74 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
+import 'color_selector_widget.dart';
+
 class BottomNavigationBarWidget extends GetView<HomeController> {
   const BottomNavigationBarWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final pages = [
       PageData(label: 'Tarefas', icon: FontAwesomeIcons.listCheck),
       PageData(label: 'Clima', icon: FontAwesomeIcons.cloudBolt),
       PageData(label: 'Loja', icon: FontAwesomeIcons.store),
+      PageData(label: 'Tema', icon: FontAwesomeIcons.palette),
     ];
+
+    final actions = [
+      TextButton(
+        onPressed: () {
+          controller.updateThemeColor(const Color(0xFF178F4E));
+          Get.back();
+        },
+        child: Text(
+          'Resetar padrão',
+          style: controller.theme.textTheme.labelLarge!.copyWith(
+            color: controller.theme.colorScheme.onSurface,
+          ),
+        ),
+      ),
+      TextButton(
+        onPressed: () {
+          controller.restoreThemeColor();
+          Get.back();
+        },
+        child: Text(
+          'Fechar',
+          style: controller.theme.textTheme.labelLarge!.copyWith(
+            color: controller.theme.colorScheme.onSurface,
+          ),
+        ),
+      ),
+      TextButton(
+        onPressed: () {
+          controller.updateThemeColor(controller.themeColor);
+          Get.back();
+        },
+        child: Text(
+          'Salvar',
+          style: controller.theme.textTheme.labelLarge!.copyWith(
+            color: controller.theme.primaryColor,
+          ),
+        ),
+      ),
+    ];
+
+    void onSelectPaletteColor() {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog.adaptive(
+            content: const ColorSelectorWidget(),
+            actions: actions,
+          );
+        },
+      );
+    }
+
     return Obx(() {
       return AnimatedTheme(
-        data: theme,
+        data: controller.theme,
         duration: const Duration(milliseconds: 100),
         curve: Curves.easeInOut,
         child: AnimatedContainer(
@@ -26,7 +80,7 @@ class BottomNavigationBarWidget extends GetView<HomeController> {
           padding:
               const EdgeInsets.only(bottom: 20, top: 4, left: 16, right: 16),
           decoration: BoxDecoration(
-            color: theme.scaffoldBackgroundColor,
+            color: controller.theme.scaffoldBackgroundColor,
             boxShadow: [topBoxShadow(controller.themeMode)],
           ),
           duration: const Duration(milliseconds: 100),
@@ -43,11 +97,15 @@ class BottomNavigationBarWidget extends GetView<HomeController> {
                         return Material(
                           child: InkWell(
                             overlayColor: WidgetStateProperty.all(
-                              theme.colorScheme.surface,
+                              controller.theme.colorScheme.surface,
                             ),
                             borderRadius: BorderRadius.circular(50),
                             onTap: () {
-                              controller.currentPageIndex = index;
+                              if (index < 3) {
+                                controller.currentPageIndex = index;
+                              } else {
+                                onSelectPaletteColor();
+                              }
                             },
                             child: Obx(() {
                               final isCurrentItem =
@@ -60,16 +118,17 @@ class BottomNavigationBarWidget extends GetView<HomeController> {
                                       item.icon,
                                       size: 18,
                                       color: isCurrentItem
-                                          ? theme.primaryColor
+                                          ? controller.theme.primaryColor
                                           : null,
                                     ),
                                     const SizedBox(height: 8),
                                     Text(
                                       item.label,
-                                      style:
-                                          theme.textTheme.labelMedium!.copyWith(
+                                      style: controller
+                                          .theme.textTheme.labelMedium!
+                                          .copyWith(
                                         color: isCurrentItem
-                                            ? theme.primaryColor
+                                            ? controller.theme.primaryColor
                                             : null,
                                       ),
                                     ),
@@ -84,7 +143,7 @@ class BottomNavigationBarWidget extends GetView<HomeController> {
                   ],
                 ),
               ),
-              const SizedBox(width: 30),
+              const SizedBox(width: 16),
               const SwitcherThemeModeWidget(),
             ],
           ),

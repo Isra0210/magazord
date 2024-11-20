@@ -9,7 +9,6 @@ class SwitcherThemeModeWidget extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return GestureDetector(
       onTap: controller.updateThemeMode,
       child: Obx(() {
@@ -20,7 +19,7 @@ class SwitcherThemeModeWidget extends GetView<HomeController> {
           height: 30,
           padding: const EdgeInsets.symmetric(horizontal: 4),
           decoration: BoxDecoration(
-            color: theme.colorScheme.surface,
+            color: controller.theme.colorScheme.surface,
             borderRadius: BorderRadius.circular(30),
             boxShadow: [
               topBoxShadow(controller.themeMode),
@@ -34,14 +33,14 @@ class SwitcherThemeModeWidget extends GetView<HomeController> {
             width: 20,
             height: 20,
             decoration: BoxDecoration(
-              color: theme.primaryColor,
+              color: controller.theme.primaryColor,
               shape: BoxShape.circle,
             ),
             child: Icon(
               controller.themeMode == ThemeMode.light
                   ? Icons.dark_mode
                   : Icons.light_mode,
-              color: theme.colorScheme.surface,
+              color: controller.theme.colorScheme.surface,
               size: 16,
             ),
           ),
