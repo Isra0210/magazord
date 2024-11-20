@@ -4,7 +4,7 @@ import 'package:task_manager_package/src/view/widgets/task_widget.dart';
 
 import '../controller/task_controller.dart';
 
-class TaskListView extends StatelessWidget {
+class TaskListView extends GetView<TaskController> {
   const TaskListView({required this.theme, super.key});
 
   final ThemeData theme;
@@ -18,9 +18,8 @@ class TaskListView extends StatelessWidget {
         curve: Curves.easeInOut,
         child: Scaffold(
           appBar: AppBar(title: const Text('Gerenciador de Tarefas')),
-          body: GetBuilder<TaskController>(
-            init: TaskController(),
-            builder: (controller) {
+          body: Obx(
+            () {
               return ListView.builder(
                 itemCount: controller.tasks.length,
                 itemBuilder: (context, index) {

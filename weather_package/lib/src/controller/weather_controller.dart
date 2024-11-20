@@ -18,11 +18,13 @@ class WeatherController extends GetxController implements GetxService {
   String? get city => _city.value;
   set city(String? value) => _city.value = value;
 
+  final Rx<String?> _error = Rx(null);
+  String? get error => _error.value;
+  set error(String? value) => _error.value = value;
+
   final Rx<WeatherModel?> _weather = Rx(null);
   WeatherModel? get weather => _weather.value;
   set weather(WeatherModel? value) => _weather.value = value;
-
-  String? error;
 
   void _checkIfPermissionError(Failure failure) {
     final isPermissionError = failure is PermissionDeniedFailure ||
@@ -32,7 +34,6 @@ class WeatherController extends GetxController implements GetxService {
 
   Future<void> getWeatherData() async {
     if (_weather.value != null) return;
-    await _getUserCity();
 
     final positionOrError = await _positionService.getUserPosition();
     positionOrError.fold((failure) {
@@ -43,13 +44,14 @@ class WeatherController extends GetxController implements GetxService {
       weatherOrError.fold((failure) {
         _checkIfPermissionError(failure);
         error = failure.message;
-      }, (weather) {
+      }, (weather) async {
+        await getUserCity();
         _weather.value = weather;
       });
     });
   }
 
-  Future<void> _getUserCity() async {
+  Future<void> getUserCity() async {
     final cityOrError = await _positionService.getCityFromCoordinates();
     cityOrError.fold(
       (failure) {

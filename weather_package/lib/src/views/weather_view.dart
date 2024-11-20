@@ -27,20 +27,16 @@ class WeatherView extends GetView<WeatherController> {
           child: FutureBuilder(
             future: controller.getWeatherData(),
             builder: (context, snapshot) {
-              final errorMessage = Stack(
-                alignment: Alignment.center,
-                children: [
-                  LoadingWidget(theme: theme),
-                  if (controller.error != null)
-                    TextErrorWidget(error: controller.error!, theme: theme),
-                ],
-              );
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return errorMessage;
-              }
               return Obx(() {
                 if (controller.weather == null) {
-                  return errorMessage;
+                  return Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      LoadingWidget(theme: theme),
+                      if (controller.error != null)
+                        TextErrorWidget(error: controller.error!, theme: theme),
+                    ],
+                  );
                 }
                 final weather = controller.weather!;
                 return SingleChildScrollView(

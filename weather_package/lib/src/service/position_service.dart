@@ -39,32 +39,22 @@ class PositionService {
   Future<Either<Failure, String>> getCityFromCoordinates() async {
     final positionOrError = await getUserPosition();
 
-    return positionOrError.fold(
-      (failure) {
-        return Left(failure);
-      },
-      (position) async {
-        try {
-          List<Placemark> placemarks = await placemarkFromCoordinates(
-            position.latitude,
-            position.longitude,
-          );
-          if (placemarks.isNotEmpty && placemarks.first.locality != null) {
-            Get.log('User city: ${placemarks.first.locality}');
-            return Right(
-              '${placemarks.first.locality} - ${placemarks.first.administrativeArea}',
-            );
-          } else {
-            Get.log('User city not found', isError: true);
-            return Left(CityNotFound());
-          }
-        } catch (e) {
-          Get.log('Error when get user city', isError: true);
-          return Left(
-            UnknowFailure('Erro ao consultar a cidade: ${e.toString()}'),
-          );
-        }
-      },
-    );
+    return positionOrError.fold((failure) {
+      return Left(failure);
+    }, (position) async {
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+        position.latitude,
+        position.longitude,
+      );
+      if (placemarks.isNotEmpty && placemarks.first.locality != null) {
+        Get.log('User city: ${placemarks.first.locality}');
+        return Right(
+          '${placemarks.first.locality} - ${placemarks.first.administrativeArea}',
+        );
+      } else {
+        Get.log('User city not found', isError: true);
+        return Left(CityNotFound());
+      }
+    });
   }
 }

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
@@ -17,29 +18,25 @@ class WeatherService {
   String get appId => const String.fromEnvironment('APPID');
 
   Future<Either<Failure, WeatherModel>> getWeatherByPosition(
-      Position position) async {
+    Position position,
+  ) async {
+    late Response response;
     try {
       final url =
           '$baseUrl?$kLat=${position.latitude}&lon=${position.longitude}&appid=$appId';
-      final response = await _connect.get(url);
+      response = await _connect.get(url);
 
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> data = response.body;
-        final weather = await compute(getWeatherFromJson, data);
-        Get.log('Get weather data - ${weather.current}');
-        return Right(weather);
-      } else {
-        Get.log(
-          'Error when get weather data - [${response.statusCode} - ${response.status}]',
-          isError: true,
-        );
-        return Left(
-          UnknowFailure(
-            'Erro: ${response.statusCode} - ${response.status}',
-          ),
-        );
-      }
+      final Map<String, dynamic> data = response.body;
+      final weather = await compute(getWeatherFromJson, data);
+      Get.log('Get weather data - ${weather.current}');
+      return Right(weather);
     } on SocketException {
+      Get.log(
+        'Error when get weather data, user without internet connection',
+        isError: true,
+      );
+      return Left(NoInternetConnectionFailure());
+    } on TimeoutException {
       Get.log(
         'Error when get weather data, user without internet connection',
         isError: true,
@@ -52,6 +49,13 @@ class WeatherService {
       );
       return Left(UnprocessedDataFailure());
     } catch (e) {
+      if (response.status.connectionError) {
+        Get.log(
+          'Error when get weather data, user without internet connection',
+          isError: true,
+        );
+        return Left(NoInternetConnectionFailure());
+      }
       Get.log(
         'Unknow error when get weather data',
         isError: true,
