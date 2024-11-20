@@ -45,7 +45,11 @@ class CurrentWeatherWidget extends StatelessWidget {
                     fontSize: 40,
                   ),
                 ),
-                Image.network(weather.current.weather.first.icon!, height: 80),
+                Image.network(
+                  weather.current.weather.first.icon!,
+                  height: 80,
+                  errorBuilder: (_, __, ___) => const SizedBox(),
+                ),
               ],
             ),
           ),

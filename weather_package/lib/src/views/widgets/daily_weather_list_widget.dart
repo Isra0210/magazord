@@ -55,6 +55,7 @@ class DailyWeatherListWidget extends StatelessWidget {
                     child: Image.network(
                       weather.weather.first.icon!,
                       height: 40,
+                      errorBuilder: (_, __, ___) => const SizedBox(),
                     ),
                   ),
                   TextWithHighlightWidget(

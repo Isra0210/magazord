@@ -65,6 +65,7 @@ class HourlyWeatherListWidget extends StatelessWidget {
                               Image.network(
                                 e.weather.first.icon!,
                                 height: 40,
+                                errorBuilder: (_, __, ___) => const SizedBox(),
                               ),
                             ],
                           ),
