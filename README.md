@@ -5,7 +5,7 @@ This test is divided into 4 files:
 - **task_manager_package**: corresponds to task 1.
 - **weather_package**: corresponds to task 2.
 - **ecommerce_package**: corresponds to task 3.
-- **example**: code execution and task 4.
+- **example**: code execution and corresponds to task 4.
 
 ## Architecture
 
