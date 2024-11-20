@@ -23,7 +23,7 @@ Instead of using **bindings** or another package for dependency injection, the i
 
 - For **caching**, the **`get_storage`** package was used.
 - For **external data sharing**, such as sharing on social media, the **`share_plus`** package was used.
-- For **displaying weather data**, the **OpenWeather** API was used.
+- For **displaying weather data**, the **`OpenWeather`** API was used.
 
 ## How to Run the Code
 
@@ -31,7 +31,6 @@ To run the code, simply execute the following command in the terminal:
 
 ```bash
 flutter run --dart-define=APPID=a0df73c6d1c42d8511f885d8e0200eb7
-
 ```
 
 ## Brief App Simulation
