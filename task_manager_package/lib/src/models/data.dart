@@ -9,7 +9,7 @@ const data = [
     "id": 2,
     "title": "Tarefa 2",
     "description": "Descrição da Tarefa 2",
-    "completed": true
+    "completed": false,
   },
   {
     "id": 3,

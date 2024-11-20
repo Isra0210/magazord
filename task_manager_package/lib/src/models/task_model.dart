@@ -1,20 +1,21 @@
+import 'dart:convert';
+
 const kId = 'id';
 const kTitle = 'title';
 const kDescription = 'description';
 const kCompleted = 'completed';
 
 class TaskModel {
+  final int id;
+  final String title;
+  final String description;
+  final bool completed;
   TaskModel({
     required this.id,
     required this.title,
     required this.description,
     required this.completed,
   });
-
-  final int id;
-  final String title;
-  final String description;
-  final bool completed;
 
   TaskModel copyWith({
     int? id,
@@ -30,13 +31,32 @@ class TaskModel {
     );
   }
 
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      kId: id,
+      kTitle: title,
+      kDescription: description,
+      kCompleted: completed,
+    };
+  }
+
   factory TaskModel.fromMap(Map<String, dynamic> map) {
     return TaskModel(
-      id: map[kId],
-      title: map[kTitle],
-      description: map[kDescription],
-      completed: map[kCompleted],
+      id: map[kId] as int,
+      title: map[kTitle] as String,
+      description: map[kDescription] as String,
+      completed: map[kCompleted] as bool,
     );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory TaskModel.fromJson(String source) =>
+      TaskModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'TaskModel(id: $id, title: $title, description: $description, completed: $completed)';
   }
 
   @override

@@ -17,12 +17,12 @@ class TemperatureModel {
 
   factory TemperatureModel.fromJson(Map<String, dynamic> json) {
     return TemperatureModel(
-      day: json['day'],
+      day: (json['day']).toDouble(),
       min: (json['min']).toDouble(),
       max: (json['max']).toDouble(),
       night: (json['night']).toDouble(),
       eve: (json['eve']).toDouble(),
-      morn: json['morn'],
+      morn: (json['morn']).toDouble(),
     );
   }
 }
