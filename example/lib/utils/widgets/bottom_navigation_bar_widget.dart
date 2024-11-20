@@ -19,52 +19,50 @@ class BottomNavigationBarWidget extends GetView<HomeController> {
       PageData(label: 'Tema', icon: FontAwesomeIcons.palette),
     ];
 
-    final actions = [
-      TextButton(
-        onPressed: () {
-          controller.updateThemeColor(const Color(0xFF178F4E));
-          Get.back();
-        },
-        child: Text(
-          'Resetar padrão',
-          style: controller.theme.textTheme.labelLarge!.copyWith(
-            color: controller.theme.colorScheme.onSurface,
-          ),
-        ),
-      ),
-      TextButton(
-        onPressed: () {
-          controller.restoreThemeColor();
-          Get.back();
-        },
-        child: Text(
-          'Fechar',
-          style: controller.theme.textTheme.labelLarge!.copyWith(
-            color: controller.theme.colorScheme.onSurface,
-          ),
-        ),
-      ),
-      TextButton(
-        onPressed: () {
-          controller.updateThemeColor(controller.themeColor);
-          Get.back();
-        },
-        child: Text(
-          'Salvar',
-          style: controller.theme.textTheme.labelLarge!.copyWith(
-            color: controller.theme.primaryColor,
-          ),
-        ),
-      ),
-    ];
-
     void onSelectPaletteColor() {
       showDialog(
         context: context,
         builder: (context) {
           return AlertDialog.adaptive(
             content: const ColorSelectorWidget(),
-            actions: actions,
+            actions: [
+              TextButton(
+                onPressed: () {
+                  controller.updateThemeColor(const Color(0xFF178F4E));
+                  Get.back();
+                },
+                child: Text(
+                  'Resetar padrão',
+                  style: controller.theme.textTheme.labelLarge!.copyWith(
+                    color: controller.theme.colorScheme.onSurface,
+                  ),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  controller.restoreThemeColor();
+                  Get.back();
+                },
+                child: Text(
+                  'Fechar',
+                  style: controller.theme.textTheme.labelLarge!.copyWith(
+                    color: controller.theme.colorScheme.onSurface,
+                  ),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  controller.updateThemeColor(controller.themeColor);
+                  Get.back();
+                },
+                child: Text(
+                  'Salvar',
+                  style: controller.theme.textTheme.labelLarge!.copyWith(
+                    color: controller.theme.primaryColor,
+                  ),
+                ),
+              ),
+            ],
           );
         },
       );
