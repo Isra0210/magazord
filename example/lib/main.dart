@@ -1,6 +1,6 @@
 import 'package:example/src/controller/home_controller.dart';
 import 'package:example/src/local_db/cache.dart';
-import 'package:example/src/view/home_page.dart';
+import 'package:example/src/view/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
@@ -29,7 +29,7 @@ class MyApp extends GetView<HomeController> {
         darkTheme: AppTheme.darkTheme,
         themeMode: controller.themeMode,
         debugShowCheckedModeBanner: false,
-        home: const HomePage(),
+        home: const HomeView(),
         onInit: () {
           FlutterNativeSplash.remove();
         },

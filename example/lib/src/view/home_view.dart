@@ -7,8 +7,8 @@ import 'package:weather_package/weather_package.dart';
 
 import '../../utils/widgets/bottom_navigation_bar_widget.dart';
 
-class HomePage extends GetView<HomeController> {
-  const HomePage({super.key});
+class HomeView extends GetView<HomeController> {
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
