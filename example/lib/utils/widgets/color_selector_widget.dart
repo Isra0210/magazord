@@ -9,6 +9,7 @@ class ColorSelectorWidget extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Obx(() {
       return Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           ...controller.colorPalette.map(
             (color) => Material(
