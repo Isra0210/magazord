@@ -56,7 +56,7 @@ class CurrentWeatherWidget extends StatelessWidget {
           spacing,
           TextWithHighlightWidget(
             highlight: 'Umidade',
-            label: '${weather.current.humidity}%',
+            label: '${weather.current.humidity.ceil()}%',
             theme: theme,
           ),
           spacing,

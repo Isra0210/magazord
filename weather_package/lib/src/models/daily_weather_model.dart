@@ -4,7 +4,7 @@ import 'weather_description.dart';
 class DailyWeatherModel {
   final int dt;
   final TemperatureModel temp;
-  final int humidity;
+  final double humidity;
   final double windSpeed;
   final List<WeatherDescriptionModel> weather;
 
@@ -20,8 +20,8 @@ class DailyWeatherModel {
     return DailyWeatherModel(
       dt: json['dt'],
       temp: TemperatureModel.fromJson(json['temp']),
-      humidity: json['humidity'],
-      windSpeed: json['wind_speed'],
+      humidity: (json['humidity']).toDouble(),
+      windSpeed: (json['wind_speed']).toDouble(),
       weather: (json['weather'] as List)
           .map((item) => WeatherDescriptionModel.fromJson(item))
           .toList(),
