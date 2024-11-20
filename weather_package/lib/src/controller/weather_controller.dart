@@ -33,8 +33,8 @@ class WeatherController extends GetxController implements GetxService {
   }
 
   Future<void> getWeatherData() async {
-    if (_weather.value != null) return;
-
+    hasLocationPermission = true;
+    error = null;
     final positionOrError = await _positionService.getUserPosition();
     positionOrError.fold((failure) {
       hasLocationPermission = false;
