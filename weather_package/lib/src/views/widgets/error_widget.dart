@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:weather_package/src/controller/weather_controller.dart';
 
 class TextErrorWidget extends StatefulWidget {
   const TextErrorWidget({required this.error, required this.theme, super.key});
@@ -13,6 +15,7 @@ class TextErrorWidget extends StatefulWidget {
 
 class _TextErrorWidgetState extends State<TextErrorWidget>
     with SingleTickerProviderStateMixin {
+  final controller = Get.find<WeatherController>();
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
 
@@ -56,20 +59,35 @@ class _TextErrorWidgetState extends State<TextErrorWidget>
             padding: const EdgeInsets.symmetric(vertical: 8),
             width: MediaQuery.of(context).size.width,
             alignment: Alignment.center,
-            child: Row(
+            child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Icon(
-                    CupertinoIcons.xmark_circle_fill,
-                    color: widget.theme.colorScheme.surface,
-                  ),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Icon(
+                        CupertinoIcons.xmark_circle_fill,
+                        color: widget.theme.colorScheme.surface,
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        widget.error,
+                        style: widget.theme.textTheme.bodyMedium!.copyWith(
+                          color: widget.theme.colorScheme.surface,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                Expanded(
+                TextButton(
+                  onPressed: () {
+                    controller.getWeatherData();
+                  },
                   child: Text(
-                    widget.error,
+                    'Atualizar',
                     style: widget.theme.textTheme.bodyMedium!.copyWith(
-                      color: widget.theme.colorScheme.surface,
+                      color: widget.theme.scaffoldBackgroundColor,
                     ),
                   ),
                 ),

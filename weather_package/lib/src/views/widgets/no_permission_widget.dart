@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:weather_package/src/controller/weather_controller.dart';
 
-class NoPermissionWidget extends StatelessWidget {
+class NoPermissionWidget extends GetView<WeatherController> {
   const NoPermissionWidget({required this.theme, super.key});
 
   final ThemeData theme;
@@ -31,7 +33,18 @@ class NoPermissionWidget extends StatelessWidget {
               style: theme.textTheme.bodyMedium,
             ),
           ),
-          const SizedBox(height: 20)
+          const SizedBox(height: 20),
+          TextButton(
+            onPressed: () {
+              controller.getWeatherData();
+            },
+            child: Text(
+              'Atualizar',
+              style: theme.textTheme.bodyMedium!.copyWith(
+                color: theme.primaryColor,
+              ),
+            ),
+          ),
         ],
       ),
     );
