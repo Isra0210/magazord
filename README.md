@@ -30,11 +30,16 @@ Instead of using **bindings** or another package for dependency injection, the i
 To run the code, simply execute the following command in the terminal:
 
 ```bash
+// When you open the terminal on root, run:
+// cd example
+// Then run the code below:
+
 flutter run --dart-define=APPID=a0df73c6d1c42d8511f885d8e0200eb7
 ```
 
 ## Brief App Simulation
 <video width="640" height="360" controls>
-  <source src="[./app_simulation.MP4](https://drive.google.com/file/d/1o3V5NTb0Fn7wSwpm6zWjZvN3fvreEA5v/view?usp=sharing)" type="video/mp4">
+  <source src="https://drive.google.com/file/d/1o3V5NTb0Fn7wSwpm6zWjZvN3fvreEA5v/view?usp=sharing" type="video/mp4">
 </video>
+
 [Or follow the link](https://drive.google.com/file/d/1o3V5NTb0Fn7wSwpm6zWjZvN3fvreEA5v/view?usp=sharing)
